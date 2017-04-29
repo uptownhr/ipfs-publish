@@ -6,7 +6,12 @@ publish ()
     echo "$@"
 
     hash_log=$(ipfs add $@)
-    hash=$(echo $hash_log | awk '{ print $2; }')
+
+    echo $hash_log 
+    
+    #    hash=$(echo $hash_log | awk '{ print $2; }')
+    hash=$(echo $hash_log | rev | cut -d' ' -f2 | rev)
+    echo $hash
 
     ipfs name publish $hash
 }
